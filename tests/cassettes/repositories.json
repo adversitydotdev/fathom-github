@@ -1,0 +1,23 @@
+{
+  "interactions": [
+    {
+      "method": "GET",
+      "url": "https://api.github.com/orgs/acme/repos?type=all&per_page=100",
+      "status": 200,
+      "headers": {
+        "Content-Type": "application/json; charset=utf-8",
+        "Link": "<https://api.github.com/organizations/9000/repos?type=all&per_page=100&page=2>; rel=\"next\", <https://api.github.com/organizations/9000/repos?type=all&per_page=100&page=2>; rel=\"last\""
+      },
+      "body": "[{\"id\": 101, \"name\": \"api\", \"full_name\": \"acme/api\", \"private\": true, \"visibility\": \"private\", \"archived\": false, \"fork\": false, \"default_branch\": \"main\", \"pushed_at\": \"2026-11-20T10:00:00Z\", \"topics\": [\"prod\"]}, {\"id\": 102, \"name\": \"web\", \"full_name\": \"acme/web\", \"private\": true, \"visibility\": \"private\", \"archived\": false, \"fork\": false, \"default_branch\": \"main\", \"pushed_at\": \"2026-11-20T10:00:00Z\", \"topics\": []}]"
+    },
+    {
+      "method": "GET",
+      "url": "https://api.github.com/organizations/9000/repos?type=all&per_page=100&page=2",
+      "status": 200,
+      "headers": {
+        "Content-Type": "application/json; charset=utf-8"
+      },
+      "body": "[{\"id\": 103, \"name\": \"legacy\", \"full_name\": \"acme/legacy\", \"private\": true, \"visibility\": \"private\", \"archived\": true, \"fork\": false, \"default_branch\": \"main\", \"pushed_at\": \"2026-11-20T10:00:00Z\", \"topics\": []}, {\"id\": 104, \"name\": \"tools\", \"full_name\": \"acme/tools\", \"private\": true, \"visibility\": \"private\", \"archived\": false, \"fork\": false, \"default_branch\": \"trunk\", \"pushed_at\": \"2026-11-20T10:00:00Z\", \"topics\": []}, {\"id\": 105, \"name\": \"forked-lib\", \"full_name\": \"acme/forked-lib\", \"private\": true, \"visibility\": \"private\", \"archived\": false, \"fork\": true, \"default_branch\": \"main\", \"pushed_at\": \"2026-11-20T10:00:00Z\", \"topics\": []}]"
+    }
+  ]
+}

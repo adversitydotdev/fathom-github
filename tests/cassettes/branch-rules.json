@@ -1,0 +1,95 @@
+{
+  "interactions": [
+    {
+      "method": "GET",
+      "url": "https://api.github.com/orgs/acme/repos?type=all&per_page=100",
+      "status": 200,
+      "headers": {
+        "Content-Type": "application/json; charset=utf-8",
+        "Link": "<https://api.github.com/organizations/9000/repos?type=all&per_page=100&page=2>; rel=\"next\", <https://api.github.com/organizations/9000/repos?type=all&per_page=100&page=2>; rel=\"last\""
+      },
+      "body": "[{\"id\": 101, \"name\": \"api\", \"full_name\": \"acme/api\", \"private\": true, \"visibility\": \"private\", \"archived\": false, \"fork\": false, \"default_branch\": \"main\", \"pushed_at\": \"2026-11-20T10:00:00Z\", \"topics\": [\"prod\"]}, {\"id\": 102, \"name\": \"web\", \"full_name\": \"acme/web\", \"private\": true, \"visibility\": \"private\", \"archived\": false, \"fork\": false, \"default_branch\": \"main\", \"pushed_at\": \"2026-11-20T10:00:00Z\", \"topics\": []}]"
+    },
+    {
+      "method": "GET",
+      "url": "https://api.github.com/organizations/9000/repos?type=all&per_page=100&page=2",
+      "status": 200,
+      "headers": {
+        "Content-Type": "application/json; charset=utf-8"
+      },
+      "body": "[{\"id\": 103, \"name\": \"legacy\", \"full_name\": \"acme/legacy\", \"private\": true, \"visibility\": \"private\", \"archived\": true, \"fork\": false, \"default_branch\": \"main\", \"pushed_at\": \"2026-11-20T10:00:00Z\", \"topics\": []}, {\"id\": 104, \"name\": \"tools\", \"full_name\": \"acme/tools\", \"private\": true, \"visibility\": \"private\", \"archived\": false, \"fork\": false, \"default_branch\": \"trunk\", \"pushed_at\": \"2026-11-20T10:00:00Z\", \"topics\": []}, {\"id\": 105, \"name\": \"forked-lib\", \"full_name\": \"acme/forked-lib\", \"private\": true, \"visibility\": \"private\", \"archived\": false, \"fork\": true, \"default_branch\": \"main\", \"pushed_at\": \"2026-11-20T10:00:00Z\", \"topics\": []}]"
+    },
+    {
+      "method": "GET",
+      "url": "https://api.github.com/repos/acme/api/rules/branches/main?per_page=100",
+      "status": 200,
+      "headers": {
+        "Content-Type": "application/json; charset=utf-8"
+      },
+      "body": "[]"
+    },
+    {
+      "method": "GET",
+      "url": "https://api.github.com/repos/acme/api/branches/main/protection",
+      "status": 200,
+      "headers": {
+        "Content-Type": "application/json; charset=utf-8"
+      },
+      "body": "{\"url\": \"...\", \"required_status_checks\": {\"strict\": true, \"contexts\": [\"ci/test\"], \"checks\": [{\"context\": \"ci/test\", \"app_id\": 15368}]}, \"enforce_admins\": {\"enabled\": true}, \"required_pull_request_reviews\": {\"dismiss_stale_reviews\": true, \"require_code_owner_reviews\": true, \"required_approving_review_count\": 2}, \"allow_force_pushes\": {\"enabled\": false}, \"allow_deletions\": {\"enabled\": false}}"
+    },
+    {
+      "method": "GET",
+      "url": "https://api.github.com/repos/acme/web/rules/branches/main?per_page=100",
+      "status": 200,
+      "headers": {
+        "Content-Type": "application/json; charset=utf-8"
+      },
+      "body": "[{\"type\": \"pull_request\", \"ruleset_source_type\": \"Organization\", \"ruleset_source\": \"acme\", \"ruleset_id\": 42, \"parameters\": {\"required_approving_review_count\": 1, \"dismiss_stale_reviews_on_push\": false, \"require_code_owner_review\": false, \"require_last_push_approval\": false, \"required_review_thread_resolution\": false}}, {\"type\": \"required_status_checks\", \"ruleset_source_type\": \"Organization\", \"ruleset_source\": \"acme\", \"ruleset_id\": 42, \"parameters\": {\"required_status_checks\": [{\"context\": \"build\"}], \"strict_required_status_checks_policy\": false}}, {\"type\": \"non_fast_forward\", \"ruleset_source_type\": \"Organization\", \"ruleset_source\": \"acme\", \"ruleset_id\": 42}, {\"type\": \"deletion\", \"ruleset_source_type\": \"Organization\", \"ruleset_source\": \"acme\", \"ruleset_id\": 42}]"
+    },
+    {
+      "method": "GET",
+      "url": "https://api.github.com/repos/acme/web/branches/main/protection",
+      "status": 404,
+      "headers": {
+        "Content-Type": "application/json; charset=utf-8"
+      },
+      "body": "{\"message\": \"Branch not protected\", \"documentation_url\": \"https://docs.github.com/rest/branches/branch-protection#get-branch-protection\", \"status\": \"404\"}"
+    },
+    {
+      "method": "GET",
+      "url": "https://api.github.com/repos/acme/tools/rules/branches/trunk?per_page=100",
+      "status": 200,
+      "headers": {
+        "Content-Type": "application/json; charset=utf-8"
+      },
+      "body": "[{\"type\": \"pull_request\", \"ruleset_source_type\": \"Repository\", \"ruleset_source\": \"acme/tools\", \"ruleset_id\": 7, \"parameters\": {\"required_approving_review_count\": 0}}]"
+    },
+    {
+      "method": "GET",
+      "url": "https://api.github.com/repos/acme/tools/branches/trunk/protection",
+      "status": 404,
+      "headers": {
+        "Content-Type": "application/json; charset=utf-8"
+      },
+      "body": "{\"message\": \"Branch not protected\", \"documentation_url\": \"https://docs.github.com/rest/branches/branch-protection#get-branch-protection\", \"status\": \"404\"}"
+    },
+    {
+      "method": "GET",
+      "url": "https://api.github.com/repos/acme/forked-lib/rules/branches/main?per_page=100",
+      "status": 200,
+      "headers": {
+        "Content-Type": "application/json; charset=utf-8"
+      },
+      "body": "[]"
+    },
+    {
+      "method": "GET",
+      "url": "https://api.github.com/repos/acme/forked-lib/branches/main/protection",
+      "status": 404,
+      "headers": {
+        "Content-Type": "application/json; charset=utf-8"
+      },
+      "body": "{\"message\": \"Branch not protected\", \"documentation_url\": \"https://docs.github.com/rest/branches/branch-protection#get-branch-protection\", \"status\": \"404\"}"
+    }
+  ]
+}

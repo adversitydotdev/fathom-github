@@ -1,0 +1,15 @@
+{
+  "type": "object",
+  "required": ["id", "name", "archived", "fork", "private", "default_branch"],
+  "properties": {
+    "id": {"type": "string"},
+    "name": {"type": "string", "description": "owner/repo"},
+    "private": {"type": "boolean"},
+    "visibility": {"type": ["string", "null"]},
+    "archived": {"type": "boolean"},
+    "fork": {"type": "boolean"},
+    "default_branch": {"type": ["string", "null"]},
+    "pushed_at": {"type": ["string", "null"]},
+    "topics": {"type": "array", "items": {"type": "string"}}
+  }
+}

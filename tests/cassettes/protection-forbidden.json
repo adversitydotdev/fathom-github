@@ -1,0 +1,31 @@
+{
+  "interactions": [
+    {
+      "method": "GET",
+      "url": "https://api.github.com/orgs/acme/repos?type=all&per_page=100",
+      "status": 200,
+      "headers": {
+        "Content-Type": "application/json; charset=utf-8"
+      },
+      "body": "[{\"id\": 101, \"name\": \"api\", \"full_name\": \"acme/api\", \"private\": true, \"visibility\": \"private\", \"archived\": false, \"fork\": false, \"default_branch\": \"main\", \"pushed_at\": \"2026-11-20T10:00:00Z\", \"topics\": [\"prod\"]}]"
+    },
+    {
+      "method": "GET",
+      "url": "https://api.github.com/repos/acme/api/rules/branches/main?per_page=100",
+      "status": 200,
+      "headers": {
+        "Content-Type": "application/json; charset=utf-8"
+      },
+      "body": "[]"
+    },
+    {
+      "method": "GET",
+      "url": "https://api.github.com/repos/acme/api/branches/main/protection",
+      "status": 403,
+      "headers": {
+        "Content-Type": "application/json; charset=utf-8"
+      },
+      "body": "{\"message\": \"Resource not accessible by personal access token\"}"
+    }
+  ]
+}

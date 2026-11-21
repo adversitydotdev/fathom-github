@@ -1,0 +1,81 @@
+id: dev.adversity.github
+name: GitHub
+version: 0.1.0
+protocol: 1
+publisher: adversity.dev
+description: Repositories, effective default-branch rules (branch protection and rulesets), and open secret scanning alerts from a GitHub organization.
+runtime:
+  kind: python
+  entrypoint: github_integration:app.run
+egress:
+  - api.github.com
+config:
+  - name: organization
+    label: GitHub organization
+    pattern: "^[A-Za-z0-9](?:[A-Za-z0-9-]{0,38})$"
+  - name: api_url
+    label: API URL (GitHub Enterprise Server only)
+    pattern: "^https://"
+    required: false
+auth:
+  - kind: fields
+    label: Fine-grained personal access token
+    fields:
+      - name: GITHUB_TOKEN
+        label: "Token with read-only Metadata, Administration, and Secret scanning alerts"
+  - kind: oauth2
+    label: GitHub App (user-to-server, expiring tokens)
+    authorize_url: "https://github.com/login/oauth/authorize"
+    token_url: "https://github.com/login/oauth/access_token"
+    scopes: []
+    pkce: true
+resources:
+  - name: repositories
+    version: 1
+    schema: schemas/repositories.json
+  - name: branch-rules
+    version: 1
+    schema: schemas/branch-rules.json
+  - name: secret-scanning-alerts
+    version: 1
+    schema: schemas/secret-scanning-alerts.json
+checks:
+  - name: branch-protection
+    version: 1
+    sources: [repositories, branch-rules]
+templates:
+  - name: change-control
+    fulfills_ref: test--ogrl-cm-01-change-control
+    test:
+      name: Default branches require review, passing checks, and no force pushes
+      control_ref: control--ogrl-cm-01
+      method: automated
+      interval: daily
+      description: >
+        Every active (not archived, not forked) repository's default branch
+        requires at least one approving review and passing status checks, and
+        blocks force pushes, through branch protection or rulesets.
+      run:
+        runner: integration
+        check: dev.adversity.github/branch-protection@1
+        sources: [dev.adversity.github/repositories@1, dev.adversity.github/branch-rules@1]
+        with:
+          min_approvals: "1"
+          require_status_checks: "true"
+  - name: secret-leaks
+    fulfills_ref: test--ogrl-ia-02-secret-hygiene
+    test:
+      name: No open GitHub secret scanning alerts
+      control_ref: control--ogrl-ia-02
+      method: automated
+      interval: weekly
+      description: >
+        Secret scanning reports no open alert in any repository of the
+        organization. Resolve an alert (revoked, false positive, or used in
+        tests) to clear it.
+      run:
+        runner: rule
+        source: dev.adversity.github/secret-scanning-alerts@1
+        select: item.state == "open"
+        assert: "false"
+        allow_empty: true

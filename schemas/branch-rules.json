@@ -1,0 +1,20 @@
+{
+  "type": "object",
+  "required": ["id", "name", "repository", "branch", "protected", "required_approvals", "status_checks", "force_push_blocked"],
+  "properties": {
+    "id": {"type": "string", "description": "The repository id."},
+    "name": {"type": "string", "description": "owner/repo:branch"},
+    "repository": {"type": "string"},
+    "branch": {"type": "string"},
+    "protected": {"type": "boolean", "description": "Classic protection or any ruleset applies."},
+    "required_approvals": {"type": "integer"},
+    "dismiss_stale_reviews": {"type": "boolean"},
+    "code_owner_review": {"type": "boolean"},
+    "status_checks": {"type": "array", "items": {"type": "string"}},
+    "strict_status_checks": {"type": "boolean"},
+    "force_push_blocked": {"type": "boolean"},
+    "deletion_blocked": {"type": "boolean"},
+    "enforce_admins": {"type": ["boolean", "null"], "description": "Classic protection only; null when only rulesets apply."},
+    "sources": {"type": "array", "items": {"type": "string"}, "description": "classic, or ruleset:<id>."}
+  }
+}
