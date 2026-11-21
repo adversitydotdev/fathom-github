@@ -1,6 +1,6 @@
 id: dev.adversity.github
 name: GitHub
-version: 0.1.0
+version: 0.1.1
 protocol: 1
 publisher: adversity.dev
 description: Repositories, effective default-branch rules (branch protection and rulesets), and open secret scanning alerts from a GitHub organization.

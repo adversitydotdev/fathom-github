@@ -10,7 +10,7 @@ from urllib.parse import quote
 
 from ogrl_integration import Integration, PermissionDenied, Subject, VendorError, fail, pass_
 
-app = Integration("dev.adversity.github", "0.1.0")
+app = Integration("dev.adversity.github", "0.1.1")
 
 PAGE = 100
 
