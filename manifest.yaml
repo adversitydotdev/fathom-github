@@ -63,10 +63,10 @@ templates:
           min_approvals: "1"
           require_status_checks: "true"
   - name: secret-leaks
-    fulfills_ref: test--ogrl-ia-02-secret-hygiene
+    fulfills_ref: test--ogrl-ac-06-secret-hygiene
     test:
       name: No open GitHub secret scanning alerts
-      control_ref: control--ogrl-ia-02
+      control_ref: control--ogrl-ac-06
       method: automated
       interval: weekly
       description: >
